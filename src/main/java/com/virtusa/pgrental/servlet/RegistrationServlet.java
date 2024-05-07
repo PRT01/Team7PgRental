@@ -2,7 +2,7 @@ package com.virtusa.pgrental.servlet;
 
 import com.virtusa.pgrental.dao.UserDAO;
 import com.virtusa.pgrental.model.User;
-import com.virtusa.pgrental.validator.Validator;
+import com.virtusa.pgrental.validation.InputValidation;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,38 +19,27 @@ public class RegistrationServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String pass = req.getParameter("pass");
-        String rePass = req.getParameter("re_pass");
         String mobile = req.getParameter("mobile");
+        String gender = req.getParameter("gender");
 
-        // Validate passwords match
-//        if (!pass.equals(rePass)) {
-//            req.setAttribute("status", "password_mismatch");
-//            RequestDispatcher requestDispatcher = req.getRequestDispatcher("registration.jsp");
-//            requestDispatcher.forward(req, resp);
-//            return;
-//        }
-
-        if (!Validator.validateName(name) || !Validator.validateEmail(email) ||
-                !Validator.validatePassword(pass, rePass) || !Validator.validateMobile(mobile)) {
-            req.setAttribute("status", "validation_failed");
+        if (!InputValidation.validateInput(name, email, mobile)) {
+            req.setAttribute("status", "failed");
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("registration.jsp");
             requestDispatcher.forward(req, resp);
             return;
         }
-    else{
-        User user = new User(name, email, pass, mobile);
-        UserDAO userDAO = new UserDAO();
-      // boolean success =
-            userDAO.addUser(user);
-            req.setAttribute("status", "success");
 
-//        if (success) {
-//            req.setAttribute("status", "success");
-//        } else {
-//            req.setAttribute("status", "failed");
-//        }
-//
-//        RequestDispatcher requestDispatcher = req.getRequestDispatcher("registration.jsp");
-//        requestDispatcher.forward(req, resp);
-   }
-}}
+        User user = new User(name, email, pass, mobile,gender);
+        UserDAO userDAO = new UserDAO();
+        boolean success = userDAO.addUser(user);
+
+        if (success) {
+            req.setAttribute("status", "success");
+        } else {
+            req.setAttribute("status", "failed");
+        }
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("registration.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+}

@@ -25,7 +25,8 @@ public class LoginServlet extends HttpServlet {
         User user = userDAO.getUserByEmail(email);
 
         if (user != null && user.getPassword().equals(password)) {
-            session.setAttribute("email", email);
+            session.setAttribute("name", user.getName());
+            session.setAttribute("userId",user.getUserId());
             requestDispatcher = req.getRequestDispatcher("index.jsp");
         } else {
             req.setAttribute("status", "failed");

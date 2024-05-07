@@ -6,16 +6,27 @@ public class User {
     private String email;
     private String password;
     private String mobile;
+    private String gender;
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+
 
     // Constructors
     public User() {
     }
 
-    public User(String name, String email, String password, String mobile) {
+    public User(String name, String email, String password, String mobile,String gender) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.mobile = mobile;
+        this.gender = gender;
     }
 
     // Getters and setters
@@ -59,7 +70,6 @@ public class User {
         this.mobile = mobile;
     }
 
-    // toString method
     @Override
     public String toString() {
         return "User{" +
@@ -68,6 +78,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", mobile='" + mobile + '\'' +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }
