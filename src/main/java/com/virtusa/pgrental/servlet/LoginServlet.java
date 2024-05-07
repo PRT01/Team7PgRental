@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
 
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("name", user.getName());
+            session.setAttribute("userId",user.getUserId());
             requestDispatcher = req.getRequestDispatcher("index.jsp");
         } else {
             req.setAttribute("status", "failed");

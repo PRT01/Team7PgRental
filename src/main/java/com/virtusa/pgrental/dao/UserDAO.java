@@ -12,13 +12,14 @@ public class UserDAO {
 
     // Method to add a new user to the database
     public boolean addUser(User user) {
-        String query = "INSERT INTO users (uname, upwd, uemail, umobile) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO users (uname, upwd, uemail, umobile,ugender) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseUtil.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getMobile());
+            preparedStatement.setString(5,user.getGender());
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
@@ -36,10 +37,12 @@ public class UserDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     User user = new User();
+                    user.setUserId(resultSet.getInt(1));
                     user.setName(resultSet.getString("uname"));
                     user.setPassword(resultSet.getString("upwd"));
                     user.setEmail(resultSet.getString("uemail"));
                     user.setMobile(resultSet.getString("umobile"));
+                    user.setGender(resultSet.getString("ugender"));
                     return user;
                 }
             }

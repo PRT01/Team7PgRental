@@ -16,17 +16,11 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userType = req.getParameter("userType");
-
-        if (userType != null && userType.equals("pgOwner")) {
-            resp.sendRedirect("registerPGowner");
-            return;
-        }
-
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String pass = req.getParameter("pass");
         String mobile = req.getParameter("mobile");
+        String gender = req.getParameter("gender");
 
         if (!InputValidation.validateInput(name, email, mobile)) {
             req.setAttribute("status", "failed");
@@ -35,7 +29,7 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
 
-        User user = new User(name, email, pass, mobile);
+        User user = new User(name, email, pass, mobile,gender);
         UserDAO userDAO = new UserDAO();
         boolean success = userDAO.addUser(user);
 

@@ -30,9 +30,9 @@
             <ul>
                 <i class="fas fa-city" style="font-size:22px; margin-right: 120px;"></i>
                 <li><a href="">Home</a></li>
-                <li><a href="">Service</a></li>
+                <li><a href="">Rent</a></li>
+                <li><a href="AddProperty.jsp">Add Property</a></li>
                 <li><a href="">About Us</a></li>
-                <li><a href="">Policy</a></li>
                 <li><a href="">Contact Us</a></li>
             </ul>
         </nav>

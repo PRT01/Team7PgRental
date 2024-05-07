@@ -34,17 +34,18 @@ a:hover{
 .btn-outline-custom:hover{
     color: #31374a;
     border-color: #ddd;
-    background-color: #b2b4a1;
+    background-color: #000000;
 }
 .btn-outline-custom-login{
-    color: #31374a;
     border-color: #ddd;
-    background-color: rgb(255, 255, 0);
+    background-color: #273036;
+    color: white;
 }
 .btn-outline-custom-login:hover{
-    color: white;
     border-color: #ddd;
-    background-color: #000000;
+    background-color: #757575;
+    color: rgb(0, 0, 0);
+   
 }
 .bg-holder {
     position: absolute;
